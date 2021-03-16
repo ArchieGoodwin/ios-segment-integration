@@ -21,7 +21,7 @@
    "Analytics": [
       "~> 3.0"
     ],
-    "UrbanAirship-iOS-SDK": [
+    "Airship": [
       "~> 14.0"
     ]
   }
