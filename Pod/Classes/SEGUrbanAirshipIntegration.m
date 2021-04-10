@@ -70,13 +70,18 @@
 
     for (NSString *key in payload.properties) {
         id value = payload.properties[key];
-
+		if(value == nil)
+		{
+			continue;;
+		}
         if ([value isKindOfClass:[NSString class]]) {
-            [customEvent setValue:value forKey:key];
+			[customEvent setProperties:@{key: value}];
+            //[customEvent setStringProperty:value forKey:key];
         }
 
         if ([value isKindOfClass:[NSNumber class]]) {
-            [customEvent setValue:value forKey:key];
+			[customEvent setProperties:@{key: value}];
+            //[customEvent setNumberProperty:value forKey:key];
         }
     }
 
@@ -85,7 +90,7 @@
 
 - (void)group:(SEGGroupPayload *)payload {
     if (payload.groupId) {
-        [[UAirship push] channel:payload.groupId];
+        [[UAirship channel] addTag:payload.groupId];
         [[UAirship push] updateRegistration];
     }
 }
